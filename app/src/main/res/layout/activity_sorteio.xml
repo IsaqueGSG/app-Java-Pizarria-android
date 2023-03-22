@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sorteio"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/container_cont"
+        style="@style/containerContador"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo"/>
+
+    <TextView
+        android:id="@+id/text_sorteio"
+        android:text="Dias para o Sorteio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@id/container_cont"
+        app:layout_constraintEnd_toEndOf="@id/container_cont"
+        app:layout_constraintTop_toTopOf="@id/container_cont"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/contador"
+        style="@style/button"
+        android:text="1D 12H:30min"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@id/container_cont"
+        app:layout_constraintEnd_toEndOf="@id/container_cont"
+        app:layout_constraintTop_toBottomOf="@id/text_sorteio" />
+
+    <TextView
+        android:id="@+id/instruçao_sorteio"
+        android:text="Para participar basta ter o App instalado\n
+            nos ligamos para voce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@id/container_cont"
+        app:layout_constraintEnd_toEndOf="@id/container_cont"
+        app:layout_constraintTop_toBottomOf="@id/contador"/>
+
+
+    <View
+        android:id="@+id/container_calendario_recompensas"
+        style="@style/containerCalendario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_cont"/>
+
+    <TextView
+        android:id="@+id/instruçaoMissao"
+        android:text="Faça check-in diario para ganhar premios!"        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="19dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@id/container_calendario_recompensas"
+        app:layout_constraintEnd_toEndOf="@id/container_calendario_recompensas"
+        app:layout_constraintTop_toTopOf="@id/container_calendario_recompensas"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dia1"
+        android:text="1"
+        style="@style/dias_calendario"
+        android:background="@drawable/background"
+        app:layout_constraintStart_toStartOf="@id/container_calendario_recompensas" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dia2"
+        android:text="2"
+        style="@style/dias_calendario"
+        android:background="@drawable/background"
+        app:layout_constraintStart_toEndOf="@id/dia1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dia3"
+        android:text="3"
+        style="@style/dias_calendario"
+        android:background="@drawable/background"
+        app:layout_constraintStart_toEndOf="@id/dia2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dia4"
+        android:text="4"
+        style="@style/dias_calendario"
+        android:background="@drawable/background"
+        app:layout_constraintStart_toEndOf="@id/dia3" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dia5"
+        android:text="5"
+        style="@style/dias_calendario"
+        android:background="@drawable/background"
+        app:layout_constraintStart_toEndOf="@id/dia4" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dia6"
+        android:text="6"
+        style="@style/dias_calendario"
+        android:background="@drawable/background"
+        app:layout_constraintStart_toEndOf="@id/dia5" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dia7"
+        android:text="7"
+        style="@style/dias_calendario"
+        android:background="@drawable/background"
+        app:layout_constraintStart_toEndOf="@id/dia6" />
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
