@@ -34,19 +34,16 @@
         android:id="@+id/edit_nome"
         style="@style/edit_text"
         android:hint="Nome"
-        android:maxLength="25"
-        android:inputType="phone"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
         app:layout_constraintTop_toTopOf="@id/containerComponents"
         />
 
     <EditText
-        android:id="@+id/edit_numTel"
+        android:id="@+id/edit_email"
         style="@style/edit_text"
         android:hint="Nº Telefone"
-        android:maxLength="11"
-        android:inputType="phone"
+        android:inputType="textEmailAddress"
         android:drawableRight="@drawable/ic_wpp"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
@@ -62,11 +59,11 @@
         android:drawableRight="@drawable/ic_eye"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/edit_numTel"
+        app:layout_constraintTop_toBottomOf="@id/edit_email"
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_cadastro"
+        android:id="@+id/bt_cadastrar"
         style="@style/button"
         android:text="@string/cadastrar"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
@@ -82,7 +79,7 @@
         android:layout_height="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_cadastro"
+        app:layout_constraintTop_toBottomOf="@id/bt_cadastrar"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"

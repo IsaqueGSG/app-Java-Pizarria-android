@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class FormLogin extends AppCompatActivity {
 
     private TextView text_tela_cadastro;
-    private androidx.appcompat.widget.AppCompatButton btLogar;
+        private androidx.appcompat.widget.AppCompatButton btLogar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

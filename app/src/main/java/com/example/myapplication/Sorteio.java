@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,8 +48,7 @@ public class Sorteio extends AppCompatActivity {
 
             //buscar alguem cadastrado e sortear
 
-            contador.setText( nome da pessoa );
+//            contador.setText();
         }
-
     }
 }
