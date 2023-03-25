@@ -43,10 +43,11 @@
         />
 
 
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/contador"
         style="@style/button"
-        android:text="1D 12H:30min"
+        android:text="Resgatar"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@id/container_cont"
         app:layout_constraintEnd_toEndOf="@id/container_cont"
