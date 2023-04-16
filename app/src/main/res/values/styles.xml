@@ -33,7 +33,7 @@
 
     <style name="containerContador">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">300dp</item>
+        <item name="android:layout_height">230dp</item>
         <item name="android:background">@drawable/container_components</item>
         <item name="android:layout_margin">20dp</item>
     </style>

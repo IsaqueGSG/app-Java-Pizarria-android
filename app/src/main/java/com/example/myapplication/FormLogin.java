@@ -65,6 +65,22 @@ public class FormLogin extends AppCompatActivity {
             }
         });
     }
+
+    private void telaSorteio(){
+        Intent intent = new Intent(FormLogin.this, Sorteio.class);
+        startActivity(intent);
+        finish();
+    }
+
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser usuarioAtual = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(usuarioAtual != null){
+            telaSorteio();
+        }
+    }
+
     private void AutenticarUsuario(View view){
         Editable emailAUX = edit_email.getText();
         Editable senhaAUX = edit_senha.getText();
@@ -101,20 +117,6 @@ public class FormLogin extends AppCompatActivity {
         });
     }
 
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser usuarioAtual = FirebaseAuth.getInstance().getCurrentUser();
-
-        if(usuarioAtual != null){
-            telaSorteio();
-        }
-    }
-
-    private void telaSorteio(){
-        Intent intent = new Intent(FormLogin.this, Sorteio.class);
-        startActivity(intent);
-        finish();
-    }
     private void initComponents(){
 
         text_tela_cadastro = findViewById(R.id.text_tela_cadastro);

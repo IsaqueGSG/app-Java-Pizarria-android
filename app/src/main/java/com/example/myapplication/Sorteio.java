@@ -60,6 +60,7 @@ public class Sorteio extends AppCompatActivity {
             finish();
         });
 
+        //sortear de forma manual
         btSortear = (TextView) findViewById(R.id.sortear);
         btSortear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +69,7 @@ public class Sorteio extends AppCompatActivity {
                 Sortear(contador);
             }
         });
+
 
         DataSorteio();
     }
@@ -85,37 +87,6 @@ public class Sorteio extends AppCompatActivity {
                 nomeUsuario.setText("Olá "+ documentSnapshot.getString("nome"));
             }
         });
-    }
-
-    private void Sortear(androidx.appcompat.widget.AppCompatButton contador){
-        db.collection("Usuarios")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            StringBuffer s = new StringBuffer();
-                            for(QueryDocumentSnapshot document : task.getResult()  ){
-                                s.append( document.getId().toString() + "," );
-                            }
-
-                            String[] IdUsuarios = s.toString().split(",");
-                            Random random = new Random();
-                            int indice = random.nextInt( IdUsuarios.length );
-                            String IdSorteado = IdUsuarios[indice];
-
-                            String CurrentUserID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                            if( CurrentUserID.equals(IdSorteado) ) {
-                                System.out.println( "voce ganhou " + CurrentUserID + " id soretado "+ IdSorteado  );
-                                contador.setText("Você Ganhou!!");
-
-                            }else{
-                                System.out.println( "voce nao ganhou "  + CurrentUserID + " id soretado "+ IdSorteado  );
-                                contador.setText("Não foi dessa vez");
-                            }
-
-                        }
-                    }
-                });
     }
 
     private void DataSorteio(){
@@ -141,4 +112,38 @@ public class Sorteio extends AppCompatActivity {
             contador.setText("data do sorteio " + StrDataSorteio);
         }
     }
+
+
+    private void Sortear(androidx.appcompat.widget.AppCompatButton contador){
+        db.collection("Usuarios")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            StringBuffer s = new StringBuffer();
+                            for(QueryDocumentSnapshot document : task.getResult()  ){
+                                s.append( document.getId().toString() + "," );
+                            }
+
+                            String[] IdUsuarios = s.toString().split(",");
+                            Random random = new Random();
+                            int indice = random.nextInt( IdUsuarios.length );
+                            String IdSorteado = IdUsuarios[indice];
+
+                            String CurrentUserID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+r                          if( CurrentUserID.equals(IdSorteado) ) {
+                                System.out.println( "voce ganhou " + CurrentUserID + " id soretado "+ IdSorteado  );
+                                contador.setText("Você Ganhou!!");
+
+                            }else{
+                                System.out.println( "voce nao ganhou "  + CurrentUserID + " id soretado "+ IdSorteado  );
+                                contador.setText("Não foi dessa vez");
+                            }
+                        }
+                    }
+                });
+
+            }
+
+
 }
