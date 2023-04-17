@@ -60,7 +60,7 @@ public class FormLogin extends AppCompatActivity {
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
                 }else{
-                    AutenticarUsuario(view);
+                    AutenticarUsuario(view, email, senha);
                 }
             }
         });
@@ -81,12 +81,7 @@ public class FormLogin extends AppCompatActivity {
         }
     }
 
-    private void AutenticarUsuario(View view){
-        Editable emailAUX = edit_email.getText();
-        Editable senhaAUX = edit_senha.getText();
-
-        String email = emailAUX.toString();
-        String senha = senhaAUX.toString();
+    private void AutenticarUsuario(View view, String email, String senha){
 
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

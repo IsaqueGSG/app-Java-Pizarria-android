@@ -72,32 +72,23 @@ public class FormCadastro extends AppCompatActivity {
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
                 }else{
-                    CadastrarUsuario(v);
+                    CadastrarUsuario(v , nome, email, senha);
                 }
             }
         });
     }
 
 
-    private void CadastrarUsuario(View v){
+    private void CadastrarUsuario(View v , String nome, String email, String senha){
 
-        Editable nomeAUX = edit_nome.getText();
-        Editable emailAUX = edit_email.getText();
-        Editable senhaAUX = edit_senha.getText();
-
-        String nome = nomeAUX.toString();
-        String email = emailAUX.toString();
-        String senna = senhaAUX.toString();
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senna).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    SalvarDadosUsuario();
+                    SalvarNomeUsuario( nome );
 
-                    Snackbar snackbar = Snackbar.make( v ,mensagens[1], Snackbar.LENGTH_SHORT );
-                    snackbar.setBackgroundTint(Color.WHITE);
-                    snackbar.setTextColor(Color.BLACK);
-                    snackbar.show();
+                    Intent intent = new Intent(FormCadastro.this, Sorteio.class);
+                    startActivity(intent);
                 }else{
                     String erro;
                     try {
@@ -121,9 +112,7 @@ public class FormCadastro extends AppCompatActivity {
         });
     }
 
-    private void SalvarDadosUsuario() {
-        Editable nomeAUX = edit_nome.getText();
-        String nome = nomeAUX.toString();
+    private void SalvarNomeUsuario(String nome ) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

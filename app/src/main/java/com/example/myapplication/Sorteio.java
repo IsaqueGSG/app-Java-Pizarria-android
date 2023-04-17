@@ -36,7 +36,7 @@ import java.util.TimerTask;
 
 
 public class Sorteio extends AppCompatActivity {
-    private androidx.appcompat.widget.AppCompatButton contador;
+    private androidx.appcompat.widget.AppCompatButton PainelResultado;
     private TextView btDeslogar;
     private TextView btSortear;
 
@@ -49,10 +49,8 @@ public class Sorteio extends AppCompatActivity {
         setContentView(R.layout.activity_sorteio);
 
         getSupportActionBar().hide();
+        initComponents();
 
-        contador = findViewById(R.id.contador);
-
-        btDeslogar = (TextView) findViewById(R.id.btDeslogar);
         btDeslogar.setOnClickListener(view -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(Sorteio.this, FormLogin.class);
@@ -60,18 +58,7 @@ public class Sorteio extends AppCompatActivity {
             finish();
         });
 
-        //sortear de forma manual
-        btSortear = (TextView) findViewById(R.id.sortear);
-        btSortear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Sortear(contador);
-            }
-        });
-
-
-        DataSorteio();
+        Sortear();
     }
 
     protected void onStart() {
@@ -89,32 +76,31 @@ public class Sorteio extends AppCompatActivity {
         });
     }
 
-    private void DataSorteio(){
-
+    private Date dtAtual(){
         Calendar c = Calendar.getInstance();
         Date dataAtual = c.getTime();
-        long dtAtualMillis = dataAtual.getTime(); // data atual em millisegundos
+        return  dataAtual;
+    }
 
+    private Date dtSorteio(){
+        Calendar c = Calendar.getInstance();
         c.set(Calendar.DAY_OF_MONTH, 30 );
         c.set(Calendar.HOUR, Calendar.MARCH);
         c.set(Calendar.YEAR, 2023 );
         Date dataSorteio = c.getTime();
-        long dtSorteioMillis = dataSorteio.getTime();  // data do sorteio em millisegundos
+        return dataSorteio;
+    };
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String StrDataSorteio = dateFormat.format(dataSorteio);
+    private void Sortear(){
 
-
-        if (dtAtualMillis == dtSorteioMillis) {
-            Sortear(contador);
-
+        if ( dtAtual().getTime() == dtSorteio().getTime() ){
+            Sortear();
         }else{
-            contador.setText("data do sorteio " + StrDataSorteio);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String StrDataSorteio = dateFormat.format(dtSorteio());
+            PainelResultado.setText("data do sorteio " + StrDataSorteio);
         }
-    }
 
-
-    private void Sortear(androidx.appcompat.widget.AppCompatButton contador){
         db.collection("Usuarios")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -131,13 +117,13 @@ public class Sorteio extends AppCompatActivity {
                             String IdSorteado = IdUsuarios[indice];
 
                             String CurrentUserID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-r                          if( CurrentUserID.equals(IdSorteado) ) {
+                            if( CurrentUserID.equals(IdSorteado) ) {
                                 System.out.println( "voce ganhou " + CurrentUserID + " id soretado "+ IdSorteado  );
-                                contador.setText("Você Ganhou!!");
+                                PainelResultado.setText("Você Ganhou!!");
 
                             }else{
                                 System.out.println( "voce nao ganhou "  + CurrentUserID + " id soretado "+ IdSorteado  );
-                                contador.setText("Não foi dessa vez");
+                                PainelResultado.setText("Não foi dessa vez");
                             }
                         }
                     }
@@ -145,5 +131,8 @@ r                          if( CurrentUserID.equals(IdSorteado) ) {
 
             }
 
-
+            private void initComponents(){
+                PainelResultado = findViewById(R.id.contador);
+                btDeslogar = (TextView) findViewById(R.id.btDeslogar);
+            }
 }
