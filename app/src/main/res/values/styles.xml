@@ -51,8 +51,8 @@
         <item name="android:radius">20dp</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:layout_marginLeft">10dp</item>
-        <item name='layout_constraintBottom_toBottomOf'>@id/container_calendario_recompensas</item>
-        <item name='layout_constraintTop_toTopOf'>@id/instruçaoMissao</item>
+        <item name='layout_constraintBottom_toBottomOf'>@id/arrayView</item>
+        <item name='layout_constraintTop_toTopOf'>@id/instrucao</item>
 
         <item name="android:textColor">@color/white</item>m>
         <item name="android:textSize">18dp</item>

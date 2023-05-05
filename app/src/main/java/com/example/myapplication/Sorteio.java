@@ -9,8 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -38,8 +44,9 @@ import java.util.TimerTask;
 public class Sorteio extends AppCompatActivity {
     private androidx.appcompat.widget.AppCompatButton PainelResultado;
     private TextView btDeslogar;
-    private TextView btSortear;
-
+    private ListView listView;
+    private ArrayList<String> lista;
+    private ArrayAdapter<String> arrayAdapter;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -59,6 +66,7 @@ public class Sorteio extends AppCompatActivity {
         });
 
         Sortear();
+        arrayView();
     }
 
     protected void onStart() {
@@ -131,8 +139,30 @@ public class Sorteio extends AppCompatActivity {
 
             }
 
+    private ArrayList<String> preencherDados(){
+        ArrayList<String> dados = new ArrayList<String>();
+        dados.add("isaque");
+        return dados;
+    };
+
+    private void arrayView(){
+        lista = preencherDados();
+        arrayAdapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_list_item_1, lista);
+        listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Toast.makeText(Sorteio.this, "clicado", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
             private void initComponents(){
                 PainelResultado = findViewById(R.id.contador);
                 btDeslogar = (TextView) findViewById(R.id.btDeslogar);
+                listView = findViewById(R.id.lista);
             }
 }

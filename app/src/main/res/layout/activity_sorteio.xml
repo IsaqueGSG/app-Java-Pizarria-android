@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_sorteio" />
 
     <TextView
-            android:id="@+id/instruçao_sorteio"
+            android:id="@+id/instrucao"
             android:textAlignment="center"
             android:text="Para participar basta ter o App instalado\nentraremos em contato"
             android:layout_width="wrap_content"
@@ -78,40 +78,29 @@
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="@id/container_cont"
             app:layout_constraintEnd_toEndOf="@id/container_cont"
-            app:layout_constraintTop_toBottomOf="@id/contador"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sortear"
-        android:text="Sortear manualmente"
-        android:textSize="20dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="@id/container_cont"
-        app:layout_constraintEnd_toEndOf="@id/container_cont"
-        app:layout_constraintTop_toBottomOf="@id/instruçao_sorteio" />
+            app:layout_constraintTop_toBottomOf="@id/contador"
+        />
 
 
         <View
-            android:id="@+id/container_calendario_recompensas"
+            android:id="@+id/arrayView"
             style="@style/containerCalendario"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/container_cont"
             app:layout_constraintBottom_toTopOf="@id/btDeslogar"/>
 
-        <TextView
-            android:id="@+id/instruçaoMissao"
-            android:text=" NOVIDADES EM BREVE !!"
+         <ListView
+            android:id="@+id/lista"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="19dp"
             android:textColor="@color/black"
             android:textSize="40dp"
             android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="@id/container_calendario_recompensas"
-            app:layout_constraintEnd_toEndOf="@id/container_calendario_recompensas"
-            app:layout_constraintTop_toTopOf="@id/container_calendario_recompensas"
+            app:layout_constraintStart_toStartOf="@id/arrayView"
+            app:layout_constraintEnd_toEndOf="@id/arrayView"
+            app:layout_constraintTop_toTopOf="@id/arrayView"
             />
 
 
