@@ -93,12 +93,8 @@
          <ListView
             android:id="@+id/lista"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="19dp"
-            android:textColor="@color/black"
-            android:textSize="40dp"
-            android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="@id/arrayView"
+            android:layout_height="350dp"
+             app:layout_constraintStart_toStartOf="@id/arrayView"
             app:layout_constraintEnd_toEndOf="@id/arrayView"
             app:layout_constraintTop_toTopOf="@id/arrayView"
             />

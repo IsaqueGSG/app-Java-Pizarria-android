@@ -34,7 +34,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
@@ -43,11 +45,12 @@ import java.util.TimerTask;
 
 public class Sorteio extends AppCompatActivity {
     private androidx.appcompat.widget.AppCompatButton PainelResultado;
-    private TextView btDeslogar;
+    private TextView btDeslogar, nomeUsuario;
     private ListView listView;
     private ArrayList<String> lista;
     private ArrayAdapter<String> arrayAdapter;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String currentUserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
 
     @Override
@@ -72,14 +75,10 @@ public class Sorteio extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        TextView nomeUsuario = findViewById(R.id.saudacao);
-        String usuarioID;
-
-        usuarioID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        DocumentReference referencia = db.collection("Usuarios").document(usuarioID);
+        DocumentReference referencia = db.collection("Usuarios").document( currentUserId );
         referencia.addSnapshotListener((documentSnapshot, error) -> {
             if(documentSnapshot != null){
-                nomeUsuario.setText("Olá "+ documentSnapshot.getString("nome"));
+                nomeUsuario.setText("Olá "+  documentSnapshot.getString("nome") );
             }
         });
     }
@@ -102,11 +101,10 @@ public class Sorteio extends AppCompatActivity {
     private void Sortear(){
 
         if ( dtAtual().getTime() == dtSorteio().getTime() ){
-            Sortear();
-        }else{
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             String StrDataSorteio = dateFormat.format(dtSorteio());
             PainelResultado.setText("data do sorteio " + StrDataSorteio);
+            return;
         }
 
         db.collection("Usuarios")
@@ -124,8 +122,16 @@ public class Sorteio extends AppCompatActivity {
                             int indice = random.nextInt( IdUsuarios.length );
                             String IdSorteado = IdUsuarios[indice];
 
+                            Map<String, Object> sorteado = new HashMap<>();
+                            sorteado.put("sorteado", IdSorteado);
+                            DocumentReference ref = db.collection("sorteados").document(IdSorteado);
+                            ref.set(sorteado).addOnSuccessListener(aVoid ->
+                                    Log.d("db", "Sucesso ao salvar os dados")).addOnFailureListener
+                                    (e -> Log.d("db_error", "Erro ao salvar os dados" + e));
+
                             String CurrentUserID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
                             if( CurrentUserID.equals(IdSorteado) ) {
+
                                 System.out.println( "voce ganhou " + CurrentUserID + " id soretado "+ IdSorteado  );
                                 PainelResultado.setText("Você Ganhou!!");
 
@@ -139,30 +145,26 @@ public class Sorteio extends AppCompatActivity {
 
             }
 
-    private ArrayList<String> preencherDados(){
-        ArrayList<String> dados = new ArrayList<String>();
-        dados.add("isaque");
-        return dados;
-    };
 
-    private void arrayView(){
-        lista = preencherDados();
+    private Void arrayView() {
+
+        lista = new ArrayList<String>();
+        lista.add( "          OQUE VOCÊ PODE GANHAR!!" );
+        lista.add( "          UMA PIZZA GRATIS!" );
+        lista.add( "          DESCONTOS!" );
+        lista.add( "          PROMOÇÕES" );
+
         arrayAdapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_list_item_1, lista);
         listView.setAdapter(arrayAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(Sorteio.this, "clicado", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+        return null;
+    };
 
 
             private void initComponents(){
                 PainelResultado = findViewById(R.id.contador);
                 btDeslogar = (TextView) findViewById(R.id.btDeslogar);
                 listView = findViewById(R.id.lista);
+                nomeUsuario = findViewById(R.id.saudacao);
             }
 }
